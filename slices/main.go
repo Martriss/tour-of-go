@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bytes"
-	"encoding/base64"
-	"fmt"
 	"image"
 	"image/color"
-	"image/png"
+	"tour_of_go/pkg/display"
 )
 
 func Pic(dx, dy int) [][]uint8 {
@@ -20,20 +17,6 @@ func Pic(dx, dy int) [][]uint8 {
 		}
 	}
 	return s
-}
-
-func displayImageInTerminal(img image.Image) {
-	var buf bytes.Buffer
-	err := png.Encode(&buf, img)
-	if err != nil {
-		panic(err)
-	}
-
-	imgBase64 := base64.StdEncoding.EncodeToString(buf.Bytes())
-
-	// This needs iTerm2 graphics protocol
-	fmt.Printf("\033]1337;File=inline=1;width=auto;height=auto:%s\a\n", imgBase64)
-
 }
 
 func main() {
@@ -50,5 +33,5 @@ func main() {
 		}
 	}
 
-	displayImageInTerminal(img)
+	display.DisplayImageInTerminal(img)
 }
