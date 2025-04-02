@@ -53,6 +53,7 @@ func Same(t1, t2 *tree.Tree) bool {
 		for val := range ch1 {
 			slice1 = append(slice1, val)
 		}
+		sort.Ints(slice1)
 	}()
 
 	go func() {
@@ -60,6 +61,7 @@ func Same(t1, t2 *tree.Tree) bool {
 		for val := range ch2 {
 			slice2 = append(slice2, val)
 		}
+		sort.Ints(slice2)
 	}()
 
 	wg.Wait()
@@ -67,9 +69,6 @@ func Same(t1, t2 *tree.Tree) bool {
 	if len(slice1) != len(slice2) {
 		return false
 	}
-
-	sort.Ints(slice1)
-	sort.Ints(slice2)
 
 	for i := range slice1 {
 		if slice1[i] != slice2[i] {
